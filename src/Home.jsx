@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 const Home = () => {
   const [products, setProducts] = useState([]); // State to store all products
   const [filteredProducts, setFilteredProducts] = useState([]); // State to store filtered products
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [searchTerm, setSearchTerm] = useState(""); // State to store the search term
-
+  const [hasSearched, setHasSearched] = useState(false); 
   // Fetch all products from the Fake Store API
   useEffect(() => {
     axios
@@ -27,9 +27,11 @@ const Home = () => {
   const handleSearch = () => {
     const filtered = products.filter((product) =>
       product.title.toLowerCase().includes(searchTerm.toLowerCase())
-    );
-    setFilteredProducts(filtered);
     
+    );
+    
+    setFilteredProducts(filtered);
+    setHasSearched(true)
   };
 
   if (loading) return <div>Loading...</div>;
@@ -37,7 +39,7 @@ const Home = () => {
 
   return (
     <div>
-      <h1>Home</h1>
+      <h1>Home     </h1>
       <div>
         <input
           type="text"
@@ -47,7 +49,7 @@ const Home = () => {
         />
         <button onClick={handleSearch}>Search</button>
       </div>
-       {filteredProducts.length === 0 ?<h1> We don't have this item here</h1> :
+       {(filteredProducts.length === 0)&&(hasSearched) ?<h1> We don't have this item here</h1> : hasSearched ?
         (<><h1>The item you are looking is in our store ....</h1>
             {filteredProducts.map((product) => (
 
@@ -56,7 +58,7 @@ const Home = () => {
             <h3>{product.title}</h3>
             <p>Price: ${product.price}</p>
           </li></ul>
-        ))}</>)}
+        ))}</>):<h1>Search a product here ... </h1>}
       
     </div>
   );
