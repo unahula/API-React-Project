@@ -134,3 +134,16 @@ ul li {
   border: 1px solid #ddd;
   border-radius: 5px;
 }
+.submit-button
+{width: 120px;
+background-color: aqua;
+text-shadow: #16273a;}
+.payment-container
+{
+  background-image: url('./mypic.jpg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 50% 70%;
+  background-attachment: fixed;
+
+}

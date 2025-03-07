@@ -13,7 +13,8 @@ const ProductDetails = () => {
       try {
         const response = await fetch(`https://fakestoreapi.com/products/${id}`);
         const data = await response.json();
-        setProduct(data);
+        setProduct({ ...data, quantity: 10 }); 
+        console.log(data);
       } catch (error) {
         console.error('Error fetching product details:', error);
       }
@@ -24,7 +25,7 @@ const ProductDetails = () => {
 
   if (!product) return <div>Loading...</div>;
   const buyItem = (id) => {
-   navigate('/signin');
+   navigate('/payment');
   }
   // const goback = (id)=> {
   //   navigate('/home');
@@ -36,7 +37,8 @@ const ProductDetails = () => {
       <p>{product.description}</p>
       <p>Price: ${product.price}</p>
       <p>Rating: {product.rating.rate} ({product.rating.count} reviews)</p>
-      <button onClick={()=>buyItem(product.id)} style={{backgroundcolor:"green"}}>{isLogged ?"Buy Now" :"Sign In to Buy"}</button>
+      <p>Quantity:{product.quantity}</p>
+      <button onClick={()=>buyItem(product.id)} style={{backgroundcolor:"green"}}>{product.quantity ===0? "Out of Stock" :"Go to Pay"}</button>
       
       <button onClick = {toggleTheme} style ={{  backgroundColor: theme === "light" ? "#234" : "#456", // Correct CSS property
           color: theme === "light" ? "#fff" : "#000", 

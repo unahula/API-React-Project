@@ -112,6 +112,7 @@ import React from "react";
 import "./App.css"; // Add some basic styling
 import Home from "./Home";
 import SignIn from "./SignIn.jsx";
+import Payment from "./Payment.jsx";
 import Post from "./Post";
 import { ThemeProvider } from "./ThemeContext";
 import GroceryList from "./GroceryList";
@@ -141,11 +142,15 @@ function App() {
           <Link to="/about" className="tab">
             About
           </Link>
-          <Link to="/signin" className="tab">
-            Sign in
+          <Link to="/payment" className="tab">
+            Payment
           </Link>
+          
           <Link to="/grocery" className="tab">
             Store Items
+          </Link>
+          <Link to="/signin" className="tab">
+            Sign in
           </Link>
         </div>
 
@@ -157,6 +162,7 @@ function App() {
             <Route path="/about" element={<div>About us: We are a reliable store.</div>} />
             <Route path="/signin" element={<SignIn />} />
             <Route path="/grocery" element={<GroceryList />} />
+            <Route path="/payment" element={<Payment />} />
             <Route path="/product/:id" element={<ProductDetails />} />
           </Routes>
         </div>
