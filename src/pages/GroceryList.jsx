@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
-import { useNavigate } from "react-router-dom"; // Correct import
-import ProductDetails from "./ProductDetails"; 
 
+import { useNavigate } from "react-router-dom"; // Correct import
+import { getProducts } from "../services/Api";
 const GroceryList = () => {
   const [groceryItems, setGroceryItems] = useState([]); // State to store grocery items
   const [loading, setLoading] = useState(true); // State to track loading status
@@ -11,17 +10,31 @@ const GroceryList = () => {
 
   // Fetch data from the Fake Store API
   useEffect(() => {
-    axios
-      .get("https://fakestoreapi.com/products") // Fake Store API endpoint
-      .then((response) => {
-        setGroceryItems(response.data); // Set the fetched data to state
-        setLoading(false); // Set loading to false
-      })
-      .catch((error) => {
-        setError(error); // Handle errors
-        setLoading(false); // Set loading to false
-      });
-  }, []); // Empty dependency array ensures this runs only once
+   getProducts()
+   .then((data)=>{
+    if(data.length>0)
+    { setGroceryItems(data);
+      setLoading(false);}
+   }
+  
+   
+  ).catch((error) => {
+          setError(error); // Handle errors
+          setLoading(false); // Set loading to false
+        });
+  },[]);
+  // useEffect(() => {
+  //   axios
+  //     .get("https://fakestoreapi.com/products") // Fake Store API endpoint
+  //     .then((response) => {
+  //       setGroceryItems(response.data); // Set the fetched data to state
+  //       setLoading(false); // Set loading to false
+  //     })
+  //     .catch((error) => {
+  //       setError(error); // Handle errors
+  //       setLoading(false); // Set loading to false
+  //     });
+  // }, []); // Empty dependency array ensures this runs only once
 
   // Display loading or error messages
   if (loading) return <div>Loading...</div>;
@@ -34,7 +47,7 @@ const GroceryList = () => {
 
   return (
     <div>
-      <h1>Store Items</h1>
+      <h1>Click here to see available items ... </h1>
       <ul style={{ listStyle: "none", padding: 0 }}>
         {groceryItems.map((item) => (
           <li

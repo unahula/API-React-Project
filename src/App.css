@@ -140,7 +140,7 @@ background-color: aqua;
 text-shadow: #16273a;}
 .payment-container
 {
-  background-image: url('./mypic.jpg');
+  background-image: url('./pages/mypic.jpg');
   background-position: center;
   background-repeat: no-repeat;
   background-size: 50% 70%;
