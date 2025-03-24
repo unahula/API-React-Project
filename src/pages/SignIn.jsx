@@ -1,18 +1,19 @@
-
-
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-const SignIn = () => {
+const SignIn = ({ onSubmit }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
   const handleSignIn = () => {
-    // Fake authentication logic
     if (email && password) {
+      // Call the onSubmit prop if provided
+      if (onSubmit) {
+        onSubmit({ email, password });
+      }
       localStorage.setItem("isAuthenticated", "true");
-      navigate("/");
+      navigate("/ProductDetail");
     } else {
       alert("Please enter email and password");
     }

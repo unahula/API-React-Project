@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useContext } from 'react';
-import { useParams } from 'react-router-dom';
-import { useNavigate } from "react-router-dom";
+import { CartContext } from "./CartContext";
+import { useParams, useNavigate } from 'react-router-dom';
+
 import { ThemeContext } from "../ThemeContext";
 import { getProductsbyId } from '../services/Api';
 const ProductDetails = () => {
@@ -10,6 +11,7 @@ const ProductDetails = () => {
   const [loading, setLoading] = useState(false);
   const [availableQuantity, setAvailableQuantity] = useState(null);
   const [quantity, setQuantity] = useState(1);
+  const { addToCart } = useContext(CartContext);
   const navigate = useNavigate();
   //const isLogged = false;
 
@@ -25,7 +27,11 @@ const ProductDetails = () => {
         setLoading(false);
       });
   }, [id]);
-
+  const handleAddToCart = () => {
+    addToCart(product); // Add the product to the cart
+    alert(`${product.title} added to cart!`);
+    navigate('/checkout');
+  };
   if(loading)  return (<div>Loading ... </div>)
     const handleCheckAvailability = () => {
       const fakeAvailableQuantity = Math.floor(Math.random() * 10) + 1; // Random quantity between 1 and 10
@@ -69,7 +75,7 @@ const ProductDetails = () => {
           Available Quantity: {availableQuantity > 0 ? quantity : "Out of Stock"}
         </p>
       )}
-          <button>Add to Cart</button>
+          <button onClick={handleAddToCart}>Add to Cart</button>
     </div>
   );
 };

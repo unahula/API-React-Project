@@ -1,8 +1,15 @@
 import React, { useContext } from "react";
-import { CartContext } from "./pages/CartContext";
+import { CartContext } from "./CartContext";
+import { useNavigate } from "react-router";
 
 
 const Checkout = () => {
+  const navigate = useNavigate();
+  const hadlePayment = () => {
+    
+    
+    navigate('/payment');
+  }
     const { cart } = useContext(CartContext);
   
     const total = cart.reduce((sum, item) => sum + item.price, 0);
@@ -19,7 +26,7 @@ const Checkout = () => {
           ))}
         </ul>
         <h2>Total: ${total.toFixed(2)}</h2>
-        <button>Place Order</button>
+        <button onClick={hadlePayment}>Place Order</button>
       </div>
     );
   };
