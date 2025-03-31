@@ -13,7 +13,7 @@ const SignIn = ({ onSubmit }) => {
         onSubmit({ email, password });
       }
       localStorage.setItem("isAuthenticated", "true");
-      navigate("/ProductDetail");
+      navigate("/grocery");
     } else {
       alert("Please enter email and password");
     }
@@ -35,6 +35,11 @@ const SignIn = ({ onSubmit }) => {
         onChange={(e) => setPassword(e.target.value)}
       />
       <button onClick={handleSignIn}>Sign In</button>
+      <br/>
+      <button onClick={() => {
+  localStorage.removeItem("isAuthenticated");
+  window.location.href = "/"; // or use navigate('/')
+}}>Log Out</button>
     </div>
   );
 };

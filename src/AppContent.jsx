@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useLocation, Link, Routes, Route } from "react-router-dom";
-import './App.css'
+import './App.css';
 import Header from "./Components/Header";
 import Home from "./pages/Home";
 import About from "./pages/About";
@@ -13,27 +13,35 @@ import ProductDetails from "./pages/ProductDetails";
 import ProtectedRoute from "./pages/ProtectedRoute";
 
 const AppContent = () => {
-  const location = useLocation(); // Get the current route
+  const location = useLocation();
   const hideNavRoutes = ["/signin", "/payment"];
   const shouldShowNav = !hideNavRoutes.includes(location.pathname);
 
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+  useEffect(() => {
+    // Check localStorage for authentication status
+    const authStatus = localStorage.getItem("isAuthenticated") === "true";
+    setIsAuthenticated(authStatus);
+  }, [location]); // re-check on route change
+
   return (
     <>
-      {/* Conditionally render the Header */}
       {shouldShowNav && <Header />}
 
-      {/* Conditionally render the navigation bar */}
       {shouldShowNav && (
         <nav>
           <Link to="/">Home</Link>
-          <Link to="/about">About</Link>
+
+          {/* Show these only when NOT authenticated */}
+          {!isAuthenticated && <Link to="/about">About</Link>}
+          {!isAuthenticated && <Link to="/post">Post</Link>}
+          {!isAuthenticated && <Link to="/grocery">Our Product</Link>}
+
           <Link to="/checkout">Checkout</Link>
-          <Link to="/post">Post</Link>
-          <Link to="/grocery">Our Product</Link>
         </nav>
       )}
 
-      {/* Render the routes */}
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
@@ -44,12 +52,11 @@ const AppContent = () => {
         <Route path="/grocery" element={<GroceryList />} />
         <Route path="/product/:id" element={<ProductDetails />} />
         <Route element={<ProtectedRoute />}>
-          {/* Protected routes go here */}
+          {/* Add protected routes here */}
         </Route>
       </Routes>
     </>
   );
 };
 
-export default AppContent; // Ensure AppContent is exported as default
-
+export default AppContent;
