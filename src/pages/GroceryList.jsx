@@ -23,20 +23,7 @@ const GroceryList = () => {
           setLoading(false); // Set loading to false
         });
   },[]);
-  // useEffect(() => {
-  //   axios
-  //     .get("https://fakestoreapi.com/products") // Fake Store API endpoint
-  //     .then((response) => {
-  //       setGroceryItems(response.data); // Set the fetched data to state
-  //       setLoading(false); // Set loading to false
-  //     })
-  //     .catch((error) => {
-  //       setError(error); // Handle errors
-  //       setLoading(false); // Set loading to false
-  //     });
-  // }, []); // Empty dependency array ensures this runs only once
-
-  // Display loading or error messages
+  
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error.message}</div>;
 

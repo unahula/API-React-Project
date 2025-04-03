@@ -25,6 +25,7 @@ const Payment = () => {
       <form onSubmit={handleSubmit}>
         <div className="form-group">
             <select>Select Card type
+            <option value ="Choose pyament">Choose payment</option>
                 <option value ="Visa">Visa</option>
                 <option value ="Master">MasterCard</option> 
                 <option value ="Giftcard">GiftCard</option>

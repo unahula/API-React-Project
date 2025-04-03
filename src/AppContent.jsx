@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react";
+
+import React from "react";
 import { useLocation, Link, Routes, Route } from "react-router-dom";
 import './App.css';
 import Header from "./Components/Header";
@@ -10,50 +11,43 @@ import Payment from "./pages/Payment";
 import Post from "./pages/Post";
 import GroceryList from "./pages/GroceryList";
 import ProductDetails from "./pages/ProductDetails";
-import ProtectedRoute from "./pages/ProtectedRoute";
+import ProductList from "./Components/Products/ProductList"
 
 const AppContent = () => {
   const location = useLocation();
-  const hideNavRoutes = ["/signin", "/payment"];
-  const shouldShowNav = !hideNavRoutes.includes(location.pathname);
 
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-
-  useEffect(() => {
-    // Check localStorage for authentication status
-    const authStatus = localStorage.getItem("isAuthenticated") === "true";
-    setIsAuthenticated(authStatus);
-  }, [location]); // re-check on route change
+  // ✅ Only hide nav and header on /signin/grocery
+  const isPrivateView = location.pathname === "/signin/grocery";
 
   return (
     <>
-      {shouldShowNav && <Header />}
+      {!isPrivateView && <Header />}
 
-      {shouldShowNav && (
+      {!isPrivateView && (
         <nav>
           <Link to="/">Home</Link>
-
-          {/* Show these only when NOT authenticated */}
-          {!isAuthenticated && <Link to="/about">About</Link>}
-          {!isAuthenticated && <Link to="/post">Post</Link>}
-          {!isAuthenticated && <Link to="/grocery">Our Product</Link>}
-
+          <Link to="/about">About</Link>
+          <Link to="/post">Post</Link>
           <Link to="/checkout">Checkout</Link>
+          <Link to="/product/1">Our Product</Link>
         </nav>
       )}
 
       <Routes>
+        {/* Public routes */}
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
-        <Route path="/signin" element={<SignIn />} />
+        <Route path="/post" element={<Post />} />
         <Route path="/checkout" element={<Checkout />} />
         <Route path="/payment" element={<Payment />} />
-        <Route path="/post" element={<Post />} />
-        <Route path="/grocery" element={<GroceryList />} />
+        <Route path="/signin" element={<SignIn />} />
         <Route path="/product/:id" element={<ProductDetails />} />
-        <Route element={<ProtectedRoute />}>
-          {/* Add protected routes here */}
-        </Route>
+
+        {/* Private view: after clicking sign in */}
+        <Route path="/signin/grocery" element={<GroceryList />} />
+
+        {/* Fallback */}
+        <Route path="*" element={<div>Page not available</div>} />
       </Routes>
     </>
   );

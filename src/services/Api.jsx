@@ -1,7 +1,8 @@
 
 import axios from "axios";
+//const PROXY = "https://cors-anywhere.herokuapp.com/";
+const API_URL = `https://fakestoreapi.com`;
 
-const API_URL = "https://fakestoreapi.com";
 
 export const getProducts = async () => {
   try {

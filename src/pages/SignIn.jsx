@@ -8,17 +8,21 @@ const SignIn = ({ onSubmit }) => {
 
   const handleSignIn = () => {
     if (email && password) {
-      // Call the onSubmit prop if provided
       if (onSubmit) {
         onSubmit({ email, password });
       }
       localStorage.setItem("isAuthenticated", "true");
-      navigate("/grocery");
+      navigate("/signin/grocery");
     } else {
       alert("Please enter email and password");
     }
   };
-
+  const handleLogout = () => {
+     
+      localStorage.removeItem("isAuthenticated");
+      navigate('/')
+    }
+  
   return (
     <div>
       <h1>Sign In</h1>
@@ -35,11 +39,12 @@ const SignIn = ({ onSubmit }) => {
         onChange={(e) => setPassword(e.target.value)}
       />
       <button onClick={handleSignIn}>Sign In</button>
-      <br/>
-      <button onClick={() => {
-  localStorage.removeItem("isAuthenticated");
-  window.location.href = "/"; // or use navigate('/')
-}}>Log Out</button>
+      <br />
+      <button
+        onClick={handleLogout}
+      >
+        Log Out
+      </button>
     </div>
   );
 };

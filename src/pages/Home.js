@@ -11,23 +11,8 @@ const Home = () => {
   const [hasSearched, setHasSearched] = useState(false); // State to track if a search has been performed
   const [backgroundImage, setBackgroundImage] = useState("");
   const navigate = useNavigate();
-  // useEffect(() => {
-  //   getProducts()
-  //     .then((response) => {
-  //       if(response&&response.data){
-  //       console.log("API Response:", response); // Log the response
-  //       setProducts(response.data);
-  //       setLoading(false);
-  //       if (response.data && response.data.length > 0) {
-  //         setBackgroundImage(response.data[0].image);
-  //       }
-  //     }})
-  //     .catch((error) => {
-  //       console.error("API Error:", error); // Log the error
-  //       setError(error);
-  //       setLoading(false);
-  //     });
-  // }, []);
+  
+  
   
   
   useEffect(() => {

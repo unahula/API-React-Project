@@ -63,7 +63,7 @@ const ProductDetails = () => {
       <button onClick={()=>buyItem(product.id)} style={{backgroundcolor:"green"}}>{product.quantity ===0? "Out of Stock" :"Go to Pay"}</button>
       
       <button onClick={handleButtonClick} 
-       style ={{  backgroundColor: theme === "light" ? "#234" : "#456", // Correct CSS property
+       style ={{  backgroundColor: theme === "light" ? "#234" : "#456", 
           color: theme === "light" ? "#fff" : "#000", 
           padding: "10px 20px",
           border: "none",
