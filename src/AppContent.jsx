@@ -41,7 +41,7 @@ const AppContent = () => {
         <Route path="/checkout" element={<Checkout />} />
         <Route path="/payment" element={<Payment />} />
         <Route path="/signin" element={<SignIn />} />
-        {/* <Route path="/product/:id" element={<ProductDetails />} /> */}
+        <Route path="/product/:id" element={<ProductDetails />} />
         <Route path="/product" element={<ProductList/>} />
         {/* <Route path="/product/:id" element={<ProductList/>} /> */}
         {/* Private view: after clicking sign in */}
