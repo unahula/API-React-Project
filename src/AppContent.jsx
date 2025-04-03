@@ -11,7 +11,7 @@ import Payment from "./pages/Payment";
 import Post from "./pages/Post";
 import GroceryList from "./pages/GroceryList";
 import ProductDetails from "./pages/ProductDetails";
-import ProductList from "./Components/Products/ProductList"
+import ProductList from "./Components/Products/ProductList.jsx"
 
 const AppContent = () => {
   const location = useLocation();
@@ -29,7 +29,7 @@ const AppContent = () => {
           <Link to="/about">About</Link>
           <Link to="/post">Post</Link>
           <Link to="/checkout">Checkout</Link>
-          <Link to="/product/1">Our Product</Link>
+          <Link to="/product">Our Product</Link>
         </nav>
       )}
 
@@ -41,8 +41,9 @@ const AppContent = () => {
         <Route path="/checkout" element={<Checkout />} />
         <Route path="/payment" element={<Payment />} />
         <Route path="/signin" element={<SignIn />} />
-        <Route path="/product/:id" element={<ProductDetails />} />
-
+        {/* <Route path="/product/:id" element={<ProductDetails />} /> */}
+        <Route path="/product" element={<ProductList/>} />
+        {/* <Route path="/product/:id" element={<ProductList/>} /> */}
         {/* Private view: after clicking sign in */}
         <Route path="/signin/grocery" element={<GroceryList />} />
 

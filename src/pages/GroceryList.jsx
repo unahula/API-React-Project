@@ -50,7 +50,7 @@ const GroceryList = () => {
               alignItems: "center",
             }}
           >
-            <img src={item.image} alt={item.title} width="100" />
+            <img src={item.image} alt={item.title} width="200" />
             <div style={{ marginLeft: "20px" }}>
               <h3>{item.title}</h3>
               <p>Price: ${item.price}</p>
